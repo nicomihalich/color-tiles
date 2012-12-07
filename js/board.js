@@ -27,22 +27,45 @@ function Board(){
 		var horIndexForward = i;
 		var vertIndexBackward = i;
 		var horIndexBackward = i;
-		while (squares[vertIndexForward].empty == 1 && vertIndexForward<squares.length){
+		while (squares[vertIndexForward].empty == 1){
 			vertIndexForward++;
+			if (vertIndexForward>=squares.length || vertIndexForward % 25 == 0){
+				vertIndexForward = squares.length+1;
+				break;
+			}
 		}
-		while (squares[horIndexForward].empty == 1 && horIndexForward<squares.length){
+		while (squares[horIndexForward].empty == 1){
 			horIndexForward += SIZE;
+			if (horIndexForward>=squares.length){
+				horIndexForward = squares.length+1;
+				break;
+			}
 		}
-		while (squares[vertIndexBackward].empty == 1 && vertIndexBackward<squares.length){
+		while (squares[vertIndexBackward].empty == 1){
 			vertIndexBackward--;
+			if (vertIndexBackward < 0 || (vertIndexBackward+1) % 25 == 0){
+				vertIndexBackward = -1;
+				break;
+			}
 		}
-		while (squares[horIndexBackward].empty == 1 && horIndexBackward<squares.length){
+		while (squares[horIndexBackward].empty == 1){
 			horIndexBackward -= SIZE;
+			if (horIndexBackward < 0){
+				horIndexBackward = -1;
+				break;
+			}
 		}
-		squares[vertIndexForward].fill = "rgb(0,0,0)";
-		squares[horIndexForward].fill = "rgb(0,0,0)";
-		squares[vertIndexBackward].fill = "rgb(0,0,0)";
-		squares[horIndexBackward].fill = "rgb(0,0,0)";
+		if (vertIndexForward < squares.length)
+			squares[vertIndexForward].fill = "rgb(0,0,0)";
+
+		if (horIndexForward < squares.length)
+			squares[horIndexForward].fill = "rgb(0,0,0)";
+		
+		if (vertIndexBackward > 0)
+			squares[vertIndexBackward].fill = "rgb(0,0,0)";
+		
+		if (horIndexBackward > 0)
+			squares[horIndexBackward].fill = "rgb(0,0,0)";
 	}
 
 	this.handleMouse = function(mx,my){
