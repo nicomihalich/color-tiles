@@ -35,12 +35,12 @@ function init(){
 	HEIGHT = canvas.height;
 	WIDTH = canvas.width;
 	ctx = canvas.getContext('2d');
-	canvas.setBackground
 
 	canvas.onmousedown = mouseDown;
 
 	board = new Board;
 	board.init();
+	
 	main();
 
 }
